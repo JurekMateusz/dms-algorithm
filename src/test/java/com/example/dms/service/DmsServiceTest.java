@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-class DmsServiceTest {
+public class DmsServiceTest {
 
   private final DmsService service = new DmsService();
 
@@ -43,6 +43,20 @@ class DmsServiceTest {
 
     List<String> expectedOrderOfTasks = //todo
         List.of("Z1", "Z3", "Z2", "Z1", "Z2", "Z3", "Z1", "Z4", "Z2");
+    assertThat(names).isEqualTo(expectedOrderOfTasks);
+  }
+
+  @Test
+  public void test_3() {
+    var z1 = Task.of("Z1", 7, 2, 6);
+    var z2 = Task.of("Z2", 5, 2, 4);
+
+    List<Task> tasks = List.of(z1, z2);
+    Seq<Result> scheduledTasks = service.compute(tasks);
+    List<String> names = getNames(scheduledTasks);
+
+    List<String> expectedOrderOfTasks =
+        List.of("Z2", "Z1", "", "Z2", "T1", "");
     assertThat(names).isEqualTo(expectedOrderOfTasks);
   }
 

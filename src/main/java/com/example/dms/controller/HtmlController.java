@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HtmlController {
 
   @GetMapping("/dms")
-  public String getHtml(Model model){
-
-
+  public String getHtml(Model model) {
     return "dms";
   }
 

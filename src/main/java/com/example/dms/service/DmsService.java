@@ -1,6 +1,5 @@
 package com.example.dms.service;
 
-import com.example.dms.dto.Result;
 import com.example.dms.dto.Task;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
@@ -15,10 +14,9 @@ import java.util.Map;
 
 public class DmsService {
 
-  private final Integer DEFAULT_PERIOD = 100;
   private Seq<Task> taskInOrder;
-  private Map<Task, Tuple2<Integer,Integer>> taskComputed = new HashMap<>();
-  private Map<String, Integer> computed = new HashMap<>();
+  private Map<Task, Tuple2<Integer, Integer>> tasksComputed = new HashMap<>();
+  private Map<String, Integer> tasksWhileComputing = new HashMap<>();
 
   public List<String> compute(List<Task> tasks) {
     return compute(tasks, getLongestPeriod(tasks));
@@ -34,10 +32,11 @@ public class DmsService {
       if (withHighestPriority.isDefined()) {
         Task task = withHighestPriority.get();
         String taskName = task.getTaskName();
-        if(!computed.containsKey(taskName)){
-          computed.put(taskName, task.getCompletionTime() - 1);
-        }else{
-         computed.put(task.getTaskName(), computed.get(task.getTaskName())-1);
+        if (!tasksWhileComputing.containsKey(taskName)) {
+          tasksWhileComputing.put(taskName, task.getCompletionTime() - 1);
+        } else {
+          tasksWhileComputing.put(task.getTaskName(),
+              tasksWhileComputing.get(task.getTaskName()) - 1);
         }
         ifTaskCompletedAddToComputed(i, task);
         result.add(taskName);
@@ -49,13 +48,13 @@ public class DmsService {
   }
 
   private Option<Task> getTaskWithHighestPriorityAvailable() {
-    return taskInOrder.find(task -> !taskComputed.containsKey(task)).toOption();
+    return taskInOrder.find(task -> !tasksComputed.containsKey(task)).toOption();
   }
 
   private void ifTaskCompletedAddToComputed(int i, Task task) {
-    if(computed.get(task.getTaskName()) == 0){
-      taskComputed.put(task,  findWithinTaskBeenDone(task, i));
-      computed.remove(task.getTaskName());
+    if (tasksWhileComputing.get(task.getTaskName()) == 0) {
+      tasksComputed.put(task, findWithinTaskBeenDone(task, i));
+      tasksWhileComputing.remove(task.getTaskName());
     }
   }
 
@@ -71,16 +70,17 @@ public class DmsService {
   }
 
   private void updateTasksComputed(int actualPeriod) {
-    for (Map.Entry<Task, Tuple2<Integer, Integer>> entry : new HashMap<>(taskComputed).entrySet()) {
+    for (Map.Entry<Task, Tuple2<Integer, Integer>> entry : new HashMap<>(
+        tasksComputed).entrySet()) {
       Tuple2<Integer, Integer> period = entry.getValue();
       if (actualPeriod >= period._1 && actualPeriod < period._2) {
         continue;
       }
-      taskComputed.remove(entry.getKey());
+      tasksComputed.remove(entry.getKey());
     }
   }
 
-  private Tuple2<Integer, Integer> findWithinTaskBeenDone(Task task, int cycle ) {
+  private Tuple2<Integer, Integer> findWithinTaskBeenDone(Task task, int cycle) {
     int nextPeriod = 0;
     while (true) {
       nextPeriod += task.getPeriod();
@@ -94,6 +94,6 @@ public class DmsService {
     return tasks.stream()
         .map(Task::getPeriod)
         .max(Comparator.naturalOrder())
-        .orElse(DEFAULT_PERIOD);
+        .orElse(20);
   }
 }

@@ -9,9 +9,10 @@ import lombok.Data;
 public class Result {
 
   private String taskName;
-  private int completionTime;
+  private int start;
+  private int end;
 
-  public static Result of(String taskName, int completionTime) {
-    return new Result(taskName, completionTime);
+  public static Result of(String taskName, int start, int end) {
+    return new Result(taskName, start, end);
   }
 }

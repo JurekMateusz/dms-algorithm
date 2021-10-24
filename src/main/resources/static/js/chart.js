@@ -13,7 +13,7 @@ function showChart(myJson) {
             myJson[i].start,
             myJson[i].end
           ],
-          fillColor: taskWithColor.get(parseInt(myJson[i].taskName))
+          fillColor: taskWithColor.get(myJson[i].taskName)
         }
     )
   }

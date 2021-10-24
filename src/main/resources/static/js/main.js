@@ -13,6 +13,7 @@ $(document).ready(function() {
 
   $(add_button).click(function(e){ //on add input button click
     e.preventDefault();
+    console.log("aaa");
     if(x < max_fields){ //max input box allowed
       x++; //text box increment
       i++;

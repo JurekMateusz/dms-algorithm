@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <link th:href="@{/css/style.css}" rel="stylesheet"/>
@@ -16,24 +17,26 @@
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <form action="#" method="post">
-      <div class="input_fields_wrap">
-        <p>
-          <button class="add_field_button button">Dodaj Task</button>
-        <p>
-        <div id="section1" class="section__new">
-          <input  class="form__input" value="T1">
-          <input id="period1" class="form__input" placeholder="P">
-          <input id="completion1" class="form__input" placeholder="C">
-          <input id="deadline1" class="form__input" placeholder="D">
-          <div class="input-group-append">
-            <button class="remove_field removeButton" type="button">Remove</button>
-          </div>
+
+    <div class="input_fields_wrap">
+      <p>
+        <button class="add_field_button button">Dodaj Task</button>
+      <p>
+      <div id="section1" class="section__new">
+        <input class="form__input" value="T1">
+        <input id="period1" class="form__input" placeholder="P">
+        <input id="completion1" class="form__input" placeholder="C">
+        <input id="deadline1" class="form__input" placeholder="D">
+        <div class="input-group-append">
+          <button class="remove_field removeButton" type="button">Remove</button>
         </div>
-        </p>
       </div>
-      <button class="js-button button">Rysuj Wykres</button>
+      </p>
+    </div>
+    <form method="post" id="results">
+      <button class="js-button button" onclick="Javascript:getResult()">Rysuj Wykres</button>
     </form>
+    <div class="tasks-diagram" id="diagram"></div>
   </div>
   <div class="col-md-4"></div>
   <!-- <div></div> tutaj bedzie miejsce na wykres -->

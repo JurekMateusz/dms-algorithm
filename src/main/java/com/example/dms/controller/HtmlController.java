@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HtmlController {
 
-  @GetMapping("/dms")
+  @GetMapping("/")
   public String getHtml(Model model) {
     return "dms";
   }

@@ -1,20 +1,23 @@
-function showChart(myJson){
-  let data='[';
-  for(let i=0;i<myJson.length;i++){
-    if(i!==0){
-      data+=","
+function showChart(myJson) {
+  let data = '[';
+  for (let i = 0; i < myJson.length; i++) {
+    if (i !== 0) {
+      data += ","
     }
-
-    data+= JSON.stringify({
-      x: 'T' + myJson[i].taskName,
-      y:[
-        myJson[i].start,
-        myJson[i].end
-      ],
-      fillColor: taskWithColor.get(parseInt(myJson[i].taskName))}
+    // console.log(myJson[i]);
+    // console.log(myJson[i].taskName);
+    // console.log(taskWithColor.get(myJson[i].taskName));
+    data += JSON.stringify({
+          x: myJson[i].taskName,
+          y: [
+            myJson[i].start,
+            myJson[i].end
+          ],
+          fillColor: taskWithColor.get(parseInt(myJson[i].taskName))
+        }
     )
   }
-  data+=']'
+  data += ']'
   console.log(JSON.parse(data));
 
   let options = {
@@ -36,7 +39,7 @@ function showChart(myJson){
     },
     dataLabels: {
       enabled: true,
-      formatter: function(val) {
+      formatter: function (val) {
         return "from " + val[0] + " to " + val[1]
       }
     },

@@ -7,13 +7,13 @@ $(document).ready(function () {
   var add_button = $(".add_field_button"); //Add button ID
 
   var send_button = $(".js-button");
-  var x = 2; //initlal text box count
+  var x = 2;
 
   $(send_button).click(function (event) {
-    event.preventDefault();   //block send function in button form
+    event.preventDefault();
 
   })
-  $(add_button).click(function (e) { //on add input button click
+  $(add_button).click(function (e) {
     e.preventDefault();
     if (x < max_fields) {
       var period = $("#period" + taskNumber).val();

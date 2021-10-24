@@ -18,7 +18,9 @@ public class AlgorithmRestController {
   @PostMapping("/dms")
   public List<Result> results(@RequestBody List<Task> tasks) {
     log.info(tasks.toString());
-    return ResultConverter.convert(new DmsService().compute(tasks));
+    List<Result> result = ResultConverter.convert(new DmsService().compute(tasks));
+    log.info(tasks.toString());
+    return result;
   }
 
 }

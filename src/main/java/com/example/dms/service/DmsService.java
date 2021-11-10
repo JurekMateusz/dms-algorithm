@@ -19,10 +19,10 @@ public class DmsService {
   private Map<String, Integer> tasksWhileComputing = new HashMap<>();
 
   public List<String> compute(List<Task> tasks) {
-    return compute(tasks, getLongestPeriod(tasks));
+    return compute(tasks, LCMService.count(tasks));
   }
 
-  public List<String> compute(List<Task> tasks, int period) {
+  List<String> compute(List<Task> tasks, int period) {
     List<String> result = new ArrayList<>();
 
     taskInOrder = sortByDeadline(tasks);

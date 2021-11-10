@@ -1,0 +1,74 @@
+html {
+  box-sizing: border-box;
+}
+
+*, ::after, ::before{
+  box-sizing: inherit;
+}
+
+.body{
+  background-color: #eee;
+}
+
+.row{
+  background-color: white;
+  max-width: 80%;
+  width: 100%;
+  margin: 10px auto;
+  text-align: center;
+  padding: 5px;
+}
+
+.form__input{
+  max-width: 80px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #ddd;
+  font-weight: bold;
+}
+
+.button{
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  margin: 10px;
+  font-size: 14px;
+  color: white;
+  background-color: teal;
+}
+
+.removeButton{
+  margin: 10px;
+  font-size: 14px;
+  border: 1px solid #f66e6e;
+  background: none;
+  color: #f83838;
+  padding: 10px 25px;
+  border-radius: 40px
+}
+
+.removeButton:hover{
+  cursor: pointer;
+  background-color: #f66e6e;
+  color: black;
+}
+
+.button:hover{
+  cursor: pointer;
+  background-color: rgba(0, 128, 128, 0.74)
+}
+
+.section__new{
+  padding: 10px;
+}
+
+.form{
+  border-top: 2px solid #ddd;
+}
+
+.paragraph{
+  border-bottom: 2px solid #ddd;
+  margin-top: 5px
+}

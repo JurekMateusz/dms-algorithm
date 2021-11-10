@@ -19,7 +19,9 @@ public class DmsService {
   private Map<String, Integer> tasksWhileComputing = new HashMap<>();
 
   public List<String> compute(List<Task> tasks) {
-    return compute(tasks, LCMService.count(tasks));
+    int count = LCMService.count(tasks);
+    System.out.println(count);
+    return compute(tasks, count);
   }
 
   List<String> compute(List<Task> tasks, int period) {

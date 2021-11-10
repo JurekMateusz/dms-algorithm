@@ -20,15 +20,16 @@ public class LCMService {
     final int listSize = periods.size();
     final int max = tryMax.get();
 
-    for (int leastCommonMutiple = max; leastCommonMutiple < Integer.MAX_VALUE;
+    for (int leastCommonMutiple = max; leastCommonMutiple < 500;
         leastCommonMutiple += max) {
 
       if (listSize <= countDivisibleNumbersByCurrentNumber(periods, leastCommonMutiple)) {
         return leastCommonMutiple;
       }
     }
-    throw new IllegalStateException(
-        format("Not found most common multiple for list of integers: %s", periods));
+    return 100;
+//    throw new IllegalStateException(
+//        format("Not found most common multiple for list of integers: %s", periods));
   }
 
   private static long countDivisibleNumbersByCurrentNumber(List<Integer> periods,
